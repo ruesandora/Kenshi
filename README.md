@@ -2,6 +2,8 @@
 
 # Kurulum:
 
+```console
+# sunucu güncelleme
 sudo apt update -y && sudo apt upgrade -y
 
 # burada 20 ve 60 saniye bekliyoruz
@@ -17,7 +19,11 @@ nvm install 16
 nvm use 16
 sudo npm i -g @kenshi.io/unchained
 sudo npm i -g @kenshi.io/unchained@latest
+```
 
+# yapılandırma işlemleri
+
+```console
 # conf.yaml içine girelim
 sudo nano conf.yaml
 
@@ -41,6 +47,13 @@ screen -S kenshi
 
 # Başlatalım
 unchained start conf.yaml --generate
+
+# Notlar:
+> Son komuttan sonra loglar akmaya başlayacak ve sync olmaya başlayacaksınız
+> 5 dakikada bir gözüken Leaderboard'da siz OLMAYACAKSINIZ
+> Bu leaderboard - sizin node'larınız tarafından diğer nodelara verilen puanlardır
+> Sizde başkaların nodelarından puan alacaksınız - hetzner'iniz varsa kafanız rahat olabilir.
+```
 
 > WinSCP veya mobaxterm benzeri bir uygulama ile conf.yaml dosyasını yedekleyelim.
 
