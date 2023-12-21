@@ -1,6 +1,24 @@
-# Kenshi
+<h1 align="center">Kenshi</h1>
 
-# Kurulum:
+> Kurulumu kolay - ne kadar süreceğini bilmiyorum belli değil - donanım için yeni sunucuya gerek yok
+
+> Ödüllü evet - ama top 200'e - herkes kurabilir ama en iyi performansı veren 200 node ödül alabilir.
+
+> TOPLULUK KANALLARI: [Sohbet Kanalımız](https://t.me/RuesChat) - [Duyurular ve Gelişmeler](https://t.me/RuesAnnouncement) - [Whatsapp](https://whatsapp.com/channel/0029VaBcj7V1dAw1H2KhMk34) - [Kenshi Telegram](https://t.me/KenshiTech)
+
+#
+
+<h1 align="center">Donanım</h1>
+
+> Bir cihaz temin etmedim mevcut nodeların yanına kurdum - ario, santiment, voi yanlarında denedim problem olmadı.
+
+> top 200'de olmak için en önemli kriter internet olacak, [Hetzner](https://hetzner.cloud/?ref=gIFAhUnYYjD3) kullandım.
+
+> illa temin edilecekse 2 CPU 2 RAM ideal 'şimdilik'
+
+#
+
+<h1 align="center">Kurulum</h1>
 
 ```console
 # sunucu güncelleme
@@ -21,7 +39,7 @@ sudo npm i -g @kenshi.io/unchained
 sudo npm i -g @kenshi.io/unchained@latest
 ```
 
-# yapılandırma işlemleri
+<h1 align="center">Yapılandırma işlemleri ve başlatma</h1>
 
 ```console
 # conf.yaml içine girelim
@@ -58,4 +76,8 @@ unchained start conf.yaml --generate
 > WinSCP veya mobaxterm benzeri bir uygulama ile conf.yaml dosyasını yedekleyelim.
 
 > Veya `cat conf.yaml` komut ile çıktıyı kaydedebilirsiniz.
+
+> conf.yaml içinde ki secret key önemli olan.
+
+> Kendinizi [burada](https://charts.mongodb.com/charts-unchained-gpust/public/dashboards/cbb6ccf6-15b2-4187-be56-ff9d2e25a48a) contributions kısmında bulabilirsiniz.
 
