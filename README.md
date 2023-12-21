@@ -69,6 +69,8 @@ screen -S kenshi
 # Başlatalım
 unchained start conf.yaml --generate
 
+> CTRL A D ile screenden çıkıyoruz.
+
 # Notlar:
 > Son komuttan sonra loglar akmaya başlayacak ve sync olmaya başlayacaksınız
 > 5 dakikada bir gözüken Leaderboard'da siz OLMAYACAKSINIZ
