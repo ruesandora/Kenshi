@@ -3,7 +3,17 @@
 > Herhangi bir sunucuda ya da lokalinizde aşağıdaki komutları sırası ile çalıştırın.
 
 ```console
-güncellenecek
+sudo apt update
+
+sudo apt install nodejs
+
+sudo git clone https://github.com/ruesandora/Kenshi.git
+
+cd Kenshi/pubkey-finder
+
+npm install
+
+node index.js
 
 ```
 
