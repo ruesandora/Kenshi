@@ -35,6 +35,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 nvm install 16
 nvm use 16
+apt install npm
 sudo npm i -g @kenshi.io/unchained
 sudo npm i -g @kenshi.io/unchained@latest
 ```
