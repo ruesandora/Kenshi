@@ -11,6 +11,8 @@ sudo git clone https://github.com/ruesandora/Kenshi.git
 
 cd Kenshi/pubkey-finder
 
+npm install
+
 node index.js
 
 ```
