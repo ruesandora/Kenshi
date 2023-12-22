@@ -1,0 +1,13 @@
+{
+  "name": "kenshi-pubkey-finder",
+  "version": "0.0.1",
+  "dependencies": {
+    "prompt-sync": "4.2.0",
+    "@chainsafe/bls": "^7.1.2",
+    "base-ex": "^0.8.1"
+  },
+  "type": "module",
+  "optionalDependencies": {
+    "@chainsafe/blst": "^0.2.9"
+  }
+}
