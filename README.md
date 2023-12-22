@@ -61,11 +61,16 @@ database:
   url: mongodb+srv://<user>:<password>@<url>/?retryWrites=true&w=majority
   name: unchained
 
+> CTRL X Y Enter ile çıkıyoruz.
+
+
 # Screen içine girelim
 screen -S kenshi
 
 # Başlatalım
 unchained start conf.yaml --generate
+
+> CTRL A D ile screenden çıkıyoruz.
 
 # Notlar:
 > Son komuttan sonra loglar akmaya başlayacak ve sync olmaya başlayacaksınız
