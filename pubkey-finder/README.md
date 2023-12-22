@@ -9,7 +9,7 @@ sudo apt install npm
 
 sudo git clone https://github.com/ruesandora/Kenshi.git
 
-cd pubkey-finder
+cd Kenshi/pubkey-finder
 
 npm install
 
