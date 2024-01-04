@@ -25,8 +25,6 @@
 sudo apt update -y && sudo apt upgrade -y
 
 # burada 20 ve 60 saniye bekliyoruz
-curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-
 # komutları sırasıyla girelim:
 curl -sL https://deb.nodesource.com/setup_20.x -o /tmp/nodesource_setup.sh
 sudo bash /tmp/nodesource_setup.sh
