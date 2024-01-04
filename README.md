@@ -28,14 +28,10 @@ sudo apt update -y && sudo apt upgrade -y
 curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 
 # komutları sırasıyla girelim:
-sudo apt-get install -y nodejs
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-nvm install 16
-nvm use 16
-apt install npm
+curl -sL https://deb.nodesource.com/setup_20.x -o /tmp/nodesource_setup.sh
+sudo bash /tmp/nodesource_setup.sh
+sudo apt install nodejs
+npm install -g npm@10.2.5
 sudo npm i -g @kenshi.io/unchained
 sudo npm i -g @kenshi.io/unchained@latest
 ```
