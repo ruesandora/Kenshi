@@ -12,7 +12,7 @@ sudo npm uninstall -g npm
 sudo rm -rf /usr/local/bin/node /usr/local/bin/npm /usr/local/bin/npx
 
 # yeni version yükleyelim
-npm install -g @kenshi.io/unchained
+nvm install node &&  sudo npm i -g @kenshi.io/unchained@latest && unchained --version
 
 # komutlarımızı tek tek girelim
 sudo sysctl -w fs.nr_open=33554432
