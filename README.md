@@ -81,3 +81,5 @@ unchained start conf.yaml --generate
 
 > Kendinizi [burada](https://charts.mongodb.com/charts-unchained-gpust/public/dashboards/cbb6ccf6-15b2-4187-be56-ff9d2e25a48a) contributions kısmında bulabilirsiniz.
 
+> Güncel score'unuza bakmak için [bu](https://kenshi.io/unchained) adresini tercih edebiliriz, siteye girdikten sonra hiçbir şey yapmadan biraz beklemeniz lazım score'ların yüklenmesi için.
+
