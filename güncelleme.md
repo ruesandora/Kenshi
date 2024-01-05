@@ -13,7 +13,8 @@ sudo rm -rf /usr/local/bin/node /usr/local/bin/npm /usr/local/bin/npx
 
 # yeni version yükleyelim
 npm install -g npm@latest
-nvm install node &&  sudo npm i -g @kenshi.io/unchained@latest && unchained --version
+npm install -g @kenshi.io/unchained
+nvm install node
 
 
 # komutlarımızı tek tek girelim
