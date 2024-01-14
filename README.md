@@ -44,7 +44,6 @@ sudo nano conf.yaml
 log: info
 name: Rues
 lite: true
-gossip: 5
 rpc:
   ethereum:
     - https://ethereum.publicnode.com
@@ -54,6 +53,12 @@ rpc:
 database:
   url: mongodb+srv://<user>:<password>@<url>/?retryWrites=true&w=majority
   name: unchained
+peers:
+  max: 128
+  parallel: 64
+gossip:
+  infect: 24
+  die: 8
 
 > CTRL X Y Enter ile çıkıyoruz.
 
