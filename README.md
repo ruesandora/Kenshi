@@ -54,6 +54,15 @@ rpc:
 database:
   url: mongodb+srv://<user>:<password>@<url>/?retryWrites=true&w=majority
   name: unchained
+peers:
+  max: 128
+  parallel: 8
+gossip:
+  infect: 24
+  die: 8
+jail:
+  duration: 5
+  strikes: 5
 
 > CTRL X Y Enter ile çıkıyoruz.
 
