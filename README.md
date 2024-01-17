@@ -42,7 +42,7 @@ sudo nano conf.yaml
 
 # burada sadece Rues kısmını kendi adınız yapın - gerisini ben ayarladım
 log: info
-name: <Rues>
+name: Rues
 lite: true
 rpc:
   ethereum:
