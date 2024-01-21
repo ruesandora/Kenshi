@@ -97,3 +97,34 @@ unchained start conf.yaml --generate
 
 > Güncel score'unuza bakmak için [bu](https://kenshi.io/unchained) adresini tercih edebiliriz, siteye girdikten sonra hiçbir şey yapmadan biraz beklemeniz lazım score'ların yüklenmesi için.
 
+<h1 align="center">Killed Hatası Alanlar İçin Otomatik Başlatma</h1>
+
+```console
+# Burada Kenshi screen içerisinde iken bu işlemleri yapıyoruz
+
+# Nano ile script dosyası oluşturuyoruz
+
+nano start_script.sh
+
+# İçerisine döngümüzü yazıyoruz
+
+while true; do
+  unchained start conf.yaml
+  sleep 1  
+done
+
+# Bunu yapıştırıp CTRL +X +Y ile kaydedim Çıkıyoruz
+
+# Script için izin veriyoruz
+
+chmod +x start_script.sh
+
+# Son olarak Bu kod ile sciptimizi çalıştırıyoruz. Artık killed olsanız bile otomatik tekrar başlatacak
+
+./start_script.sh
+
+```
+
+
+
+
