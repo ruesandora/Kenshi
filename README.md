@@ -42,7 +42,7 @@ sudo nano conf.yaml
 
 # burada sadece Rues kısmını kendi adınız yapın - gerisini ben ayarladım
 log: info
-name: Rues
+name: RUES
 lite: true
 rpc:
   ethereum:
@@ -60,11 +60,11 @@ jail:
   strikes: 5
 waves:
   count: 8
-  select: 50
-  group: 8
+  select: 35
+  group: 16
   jitter:
-    min: 5
-    max: 15
+    min: 10
+    max: 25
 
 > CTRL X Y Enter ile çıkıyoruz.
 
