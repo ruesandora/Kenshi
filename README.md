@@ -59,12 +59,12 @@ jail:
   duration: 5
   strikes: 5
 waves:
-  count: 8
-  select: 50
-  group: 8
+  count: 4
+  select: 35
+  group: 16
   jitter:
-    min: 5
-    max: 15
+    min: 10
+    max: 25
 
 > CTRL X Y Enter ile çıkıyoruz.
 
