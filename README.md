@@ -1,99 +1,142 @@
-<h1 align="center">Kenshi</h1>
+# Kenshi-Go-Docker-Kurulumu
 
-> Kurulumu kolay - ne kadar süreceğini bilmiyorum belli değil - donanım için yeni sunucuya gerek yok
+> [!NOTE]
+> Kenshi yakın zamanda typescript yerine GOLang ile çalışmaya başladı. JS versiyonunda çalışmaya devam edecek nodelar için puan vermeyi bıraktığını duyurdu. 
+<br>
+Kenshi Go versiyonunu Docker çalıştırmak isterseniz aşağıda detaylı anlatımını bulabilirsiniz.
+<br>
 
-> Ödüllü evet - ama top 200'e - herkes kurabilir ama en iyi performansı veren 200 node ödül alabilir.
-
-> TOPLULUK KANALLARI: [Sohbet Kanalımız](https://t.me/RuesChat) - [Duyurular ve Gelişmeler](https://t.me/RuesAnnouncement) - [Whatsapp](https://whatsapp.com/channel/0029VaBcj7V1dAw1H2KhMk34) - [Kenshi Telegram](https://t.me/KenshiTech)
-
-#
-
-<h1 align="center">Donanım</h1>
-
-> Bir cihaz temin etmedim mevcut nodeların yanına kurdum - ario, santiment, voi yanlarında denedim problem olmadı.
-
-> top 200'de olmak için en önemli kriter internet olacak, [Hetzner](https://hetzner.cloud/?ref=gIFAhUnYYjD3) kullandım.
-
-> illa temin edilecekse 2 CPU 2 RAM ideal 'şimdilik'
-
-#
-
-<h1 align="center">Kurulum</h1>
-
-```console
-# sunucu güncelleme
+## Sunucu Güncelleme ve Docker Kurulumu
+```
+# Öncelikle sunucudaki güncellemelerimizi ve yükseltmelerimizi yapalım.
 sudo apt update -y && sudo apt upgrade -y
 
-# burada 20 ve 60 saniye bekliyoruz
-# komutları sırasıyla girelim:
-curl -sL https://deb.nodesource.com/setup_20.x -o /tmp/nodesource_setup.sh
-sudo bash /tmp/nodesource_setup.sh
-sudo apt install nodejs
-npm install -g npm@10.2.5
-sudo npm i -g @kenshi.io/unchained
-sudo npm i -g @kenshi.io/unchained@latest
+# Ardından sunucumuza HTTPS üzerinden indireceğimiz kaynak için sorun çıkmaması adına ve linkten indirdiğimiz zip dosyasını unzip ederken sorun yaşamamak için aşağıda yazan kodları girelim.
+sudo apt install apt-transport-https ca-certificates curl software-properties-common wget unzip
+
+# Docker GPG anahtarını sunucumuza ekleyelim
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+# Docker'ı kaynaklarımıza ekleyelim 
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# Eklediğimiz kaynağın tanınması için yeniden güncelleyelim
+sudo apt update
+
+# Ubuntu yerin Docker üzerinden kurulum yapacağımızı garanti altına alalım
+apt-cache policy docker-ce
+
+```
+> [!WARNING]
+> En son yazmış olduğumuz kod bize bir ekran çıktısı verecektir. Buradaki çıktıda Installed: (none) olmasına dikkat edelim.
+```
+docker-ce:
+  Installed: (none)
+  ...
+  ...
+  5:20.10.14~3-0~ubuntu-focal 500
+  500 https://download.docker.com/linux/ubuntu jammy/stable amd64 Packages
+  5:20.10.13~3-0~ubuntu-focal 500
+  500 https://download.docker.com/linux/ubuntu jammy/stable amd64 Packages
+  ...
+  ...
+
+## Yukarıdaki komuttan sonra ekrandan çıkamıyorsanız terminali kapatıp tekrar açabilirsiniz. 
+
+## Ve ardından Docker'ı yükleyelim
+sudo apt install docker-ce
+
+## Docker'ın kurulduğundan emin olmak için aşağıdaki kodu çalıştıralım.
+sudo systemctl status docker
+```
+> [!WARNING]
+> En son yazmış olduğumuz kod bize aşağıdaki gibi bir çıktı vermelidir.
+
+```
+Output
+● docker.service - Docker Application Container Engine
+     Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor preset: enabled)
+     ...
+     ...
+     ...
+```
+<br>
+
+## Kenshi Unchained Go Versiyon Kurulumu
+
+```
+# wget ile dosyamızı indirelim
+wget https://github.com/KenshiTech/unchained/releases/download/v0.11.1/unchained-v0.11.1-docker.zip
+
+# İndirmiş olduğumuz dosyamızı unzipleyelim
+unzip  unchained-v0.11.1-docker.zip
+
+# Unzip ile ortaya çıkan dosyamızın içine girelim
+cd unchained-v0.11.1-docker
+
+# Aşağıdaki kod ile conf adında bir dosya oluşturalım.
+mkdir conf
+
+# cp komutu ile dosya içerisinde bulunan conf.worker.yaml.template isimli dosyamızı conf dosyası içerisine conf.worker.yaml olarak kopyalayalım.
+cp conf.worker.yaml.template conf/conf.worker.yaml
+
+# Aşağıdaki kod ile worker'ı çalıştıralım. Ardından hemen durduracağız. 
+./unchained.sh worker up -d
+
+# Worker'ı durduralım. Lütfen sayımın bitmesini (yani workerın durmasını) bekleyin 
+./unchained.sh worker stop
+
+# Aşağıdaki komut ile conf içerisine girelim. Bu komuttan sonra aşağıda 2 ayrı anlatım bulunacak. Daha önce Kenshi kullananlar ve kulllanmayanlar için. Lütfen warning kısımlarından size hangisi uygunsa ona göre hareket edin!
+cd conf 
 ```
 
-<h1 align="center">Yapılandırma işlemleri ve başlatma</h1>
-
-```console
-# conf.yaml içine girelim
-sudo nano conf.yaml
-
-# burada sadece Rues kısmını kendi adınız yapın - gerisini ben ayarladım
-log: info
-name: Rues
-lite: true
-rpc:
-  ethereum:
-    - https://ethereum.publicnode.com
-    - https://eth.llamarpc.com
-    - wss://ethereum.publicnode.com
-    - https://eth.rpc.blxrbdn.com
-database:
-  url: postgres://<user>:<pass>@<host>:<port>/<db>
-peers:
-  max: 128
-  parallel: 8
-jail:
-  duration: 5
-  strikes: 5
-waves:
-  count: 8
-  select: 50
-  group: 8
-  jitter:
-    min: 5
-    max: 15
-
-> CTRL X Y Enter ile çıkıyoruz.
+> [!WARNING]
+> Bu aşama Kenshi'yi daha önce kuranlar için! (Elinizde secretKey ve publicKey bulunuyorsa)
+> Daha önca çalıştırdıysanız Kenshi TypeScript ile çalıştırdığımız conf.yaml içerisinde bu bilgiler bulunur. 
 
 
-# Screen içine girelim
-screen -S kenshi
+```
+# conf.worker.yaml  içerisine gidelim;
+nano conf.worker.yaml
 
-# Başlatalım
-unchained start conf.yaml --generate
+# Ekranda olan "name" bölümünü düzenleyin ve ardından sırasıyla CTRL +X, Y ve enter diyerek çıkın.
 
-> CTRL A D ile screenden çıkıyoruz.
+# secrets.worker.yaml  içerisine gidelim;
+nano secrets.worker.yaml
 
-# Notlar:
-> Son komuttan sonra loglar akmaya başlayacak ve sync olmaya başlayacaksınız
-> 5 dakikada bir gözüken Leaderboard'da siz OLMAYACAKSINIZ
-> Bu leaderboard - sizin node'larınız tarafından diğer nodelara verilen puanlardır
-> Sizde başkaların nodelarından puan alacaksınız - hetzner'iniz varsa kafanız rahat olabilir.
+# Bu kısımda secretKey ve publicKey alanlarını düzenleyin ve ardından sırasıyla CTRL +X, Y ve enter diyerek çıkın.
 ```
 
-> WinSCP veya mobaxterm benzeri bir uygulama ile conf.yaml dosyasını yedekleyelim.
+> [!WARNING]
+> Bu aşama Kenshi'yi ilk defa kuracaklar içindir! Daha önce hiç TypeScript dahi çalıştırmamış kullanıcılar içindir!
 
-> Veya `cat conf.yaml` komut ile çıktıyı kaydedebilirsiniz.
+```
+# conf.worker.yaml  içerisine gidelim ve name içerisine kullanmak istediğiniz (Websitesinde görünecek adınız) nickinizi yazın;
+nano conf.worker.yaml
 
-> conf.yaml içinde ki secret key önemli olan.
+# Ekranda olan "name" bölümünü düzenledikten sonra CTRL +X, Y ve enter diyerek çıkın.
+```
 
-> Public keyiniz dosya içerisinde bulunmuyorsa alttaki komut ile öğrenebilirsiniz.
- ``` unchained address conf.yaml ```
+> [!CAUTION]
+> Lütfen yukarıdaki seçeneklerden size uygun olan adımı yaptığınızdan emin olun! Her ikisini aynı anda yapmayacaksınız, yalnızca size uygun olan "WARNING" seçeneğinin altındaki adımları uygulayın!<br><br>
 
-> Kendinizi [burada](https://charts.mongodb.com/charts-unchained-gpust/public/dashboards/cbb6ccf6-15b2-4187-be56-ff9d2e25a48a) contributions kısmında bulabilirsiniz.
+```
+# Aşağıdaki kod ile ana klasörümüze dönelim.
+cd ..
 
-> Güncel score'unuza bakmak için [bu](https://kenshi.io/unchained) adresini tercih edebiliriz, siteye girdikten sonra hiçbir şey yapmadan biraz beklemeniz lazım score'ların yüklenmesi için.
+# Yukarıdaki işlemleri hallettiysek şimdi dosyamıza çalıştırma izni verelim.
+chmod +x unchained.sh
 
+# Artık çalıştırmaya hazırız! Aşağıdaki kod ile çalıştıralım.
+./unchained.sh worker up -d
+```
+
+> [!TIP]
+> ./unchained.sh worker logs -f  kodu ile loglarınızı kontrol edebilirsiniz.<br><br>
+> Herhangi bir sorun yoksa ekran görüntünüz aşağıdaki gibi olmalıdır.<br><br>
+
+![Screenshot_6](https://github.com/Dtractus/Kenshi-Go-Docker-Kurulumu/assets/55835876/9060921b-9e56-401e-bba1-9c0ba4b290fa)
+
+
+
+[Dtractus](https://github.com/Dtractus)
